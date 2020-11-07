@@ -52,4 +52,22 @@ final class ProductService
     {
         return $this->repository->getProducts();
     }
+
+    /**
+     * Read a product by the given product id.
+     *
+     * @param int $productId The user id
+     *
+     * @throws ValidationException
+     *
+     * @return Array The products data
+     */
+    public function getProductsByCategoryDetails(int $categoryId)
+    {
+        // Validation
+        if (empty($categoryId)) {
+            throw new ValidationException('Category ID required');
+        }
+        return $this->repository->getProductsByCategory($categoryId);
+    }
 }

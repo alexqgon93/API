@@ -46,4 +46,16 @@ class ProductRepository
     {
         return array_values(R::findAll('products'));
     }
+
+    /**
+     * Get products of a specific category
+     *
+     * @return Array The products data
+     */
+    public function getProductsByCategory(int $categoryId)
+    {
+        return array_values(R::getAll("select * from products where category = $categoryId"));
+    }
+
+
 }

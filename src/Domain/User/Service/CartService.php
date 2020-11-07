@@ -34,13 +34,13 @@ final class CartService
      *
      * @return SingleObject The cart data
      */
-    public function getCartDetails(int $userId)
+    public function getCartDetails(int $cartId)
     {
         // Validation
-        if (empty($userId)) {
-            throw new ValidationException('User ID required');
+        if (empty($cartId)) {
+            throw new ValidationException('Cart ID required');
         }
-        return $this->repository->getCartById($userId);
+        return $this->repository->getCartById($cartId);
     }
 
     /**

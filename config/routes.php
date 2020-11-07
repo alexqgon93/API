@@ -19,10 +19,13 @@ return function (App $app) {
     /** Endpoints for cart table */
     $app->get('/cart', \App\Action\CartsAction::class);
     $app->get('/cart/{id}', \App\Action\CartAction::class);
+    $app->post('/cart/add', \App\Action\CartAddAction::class);
+    $app->delete('/cart/delete/{id}', \App\Action\CartDeleteAction::class);
 
     /** Endpoints for prodcuts table */
     $app->get('/products', \App\Action\ProductsAction::class);
     $app->get('/products/{id}', \App\Action\ProductAction::class);
+    $app->get('/products-category/{id}', \App\Action\ProductsCategoryAction::class);
 
     /** Endpoints for roles table */
     $app->get('/roles', \App\Action\RolesAction::class);
