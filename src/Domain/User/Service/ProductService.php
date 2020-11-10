@@ -70,4 +70,14 @@ final class ProductService
         }
         return $this->repository->getProductsByCategory($categoryId);
     }
+
+    /**
+     * Get featured products.
+     *
+     * @return Array The products data
+     */
+    public function getProductsFeatured()
+    {
+        return $this->repository->getProductsFeatured(1);
+    }
 }

@@ -25,9 +25,11 @@ return function (App $app) {
     /** Endpoints for prodcuts table */
     $app->get('/products', \App\Action\ProductsAction::class);
     $app->get('/products/{id}', \App\Action\ProductAction::class);
+    $app->get('/products-featured', \App\Action\ProductsFeaturedAction::class);
     $app->get('/products-category/{id}', \App\Action\ProductsCategoryAction::class);
 
     /** Endpoints for roles table */
     $app->get('/roles', \App\Action\RolesAction::class);
     $app->get('/roles/{id}', \App\Action\RoleAction::class);
+
 };

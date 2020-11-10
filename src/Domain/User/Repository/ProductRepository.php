@@ -57,5 +57,14 @@ class ProductRepository
         return array_values(R::getAll("select * from products where category = $categoryId"));
     }
 
+    /**
+     * Get products featured
+     *
+     * @return Array The products data
+     */
+    public function getProductsFeatured(int $featured)
+    {
+        return array_values(R::getAll("select * from products where featured = $featured"));
+    }
 
 }
