@@ -8,7 +8,8 @@ return function (App $app) {
     /** Endpoints for users table */
     $app->get('/users', \App\Action\UsersAction::class);
     $app->get('/users/{id}', \App\Action\UserAction::class);
-    $app->post('/users/add', \App\Action\UserAddAction::class);
+    $app->post('/users/register', \App\Action\UserAddAction::class);
+    $app->post('/users/login', \App\Action\UserLoginAction::class);
     $app->put('/users/update/{id}', \App\Action\UserUpdateAction::class);
     $app->delete('/users/delete/{id}', \App\Action\UserDeleteAction::class);
 

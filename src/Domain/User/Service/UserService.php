@@ -52,4 +52,18 @@ final class UserService
     {
         return $this->repository->getUsers();
     }
+
+    /**
+     * User already exists
+     *
+     * @return Array The user data
+     */
+    public function getEmail($email)
+    {
+        // Validation
+        if (empty($email)) {
+            throw new ValidationException('Email required');
+        }
+        return $this->repository->emailExists($email);
+    }
 }

@@ -47,4 +47,11 @@ class UserRepository
         return R::findAll('users');
     }
 
+    /**
+     * Get if the email exists on the DB
+     *  */
+    public function emailExists($email)
+    {
+        return array_values(R::getAll("select * from users where email = '$email' LIMIT 0,1"));
+    }
 }
