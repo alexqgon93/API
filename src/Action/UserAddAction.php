@@ -47,12 +47,11 @@ final class UserAddAction
         $newUser->name = $parsedBody['name'];
         $newUser->surname = $parsedBody['surname'];
         $newUser->dateBirth = $parsedBody['dateBirth'];
-        $newUser->username = $parsedBody['username'];
         $newUser->password = $parsedBody['password'];
         $newUser->email = $parsedBody['email'];
         $newUser->isAuth = ($parsedBody['isAuth'] != null) ? $parsedBody['isAuth'] : 0;
 
-        if (!empty($newUser->name) && !empty($newUser->surname) && !empty($newUser->dateBirth) && !empty($newUser->email) && !empty($newUser->username) && !empty($newUser->password) && !empty($newUser->username)) {
+        if (!empty($newUser->name) && !empty($newUser->surname) && !empty($newUser->dateBirth) && !empty($newUser->email) && !empty($newUser->password)) {
             // Invoke the Domain with inputs and retain the result
             $addUserList = R::store($newUser);
             // Build the HTTP response

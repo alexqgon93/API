@@ -46,9 +46,15 @@ final class CartDeleteAction
 
         // Invoke the Domain with inputs and retain the result
         $deleteCart = R::trash($cartData);
-        // Build the HTTP response
-        $response->getBody()->write((string) json_encode($deleteCart));
 
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+        if ($deleteCart == 1) {
+            // Build the HTTP response
+            $response->getBody()->write((string) json_encode(array("message" => "Carrito eliminado correctament.")));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+        } else {
+            $response->getBody()->write((string) json_encode(array("message" => "Error al hacer la llamada.")));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
+        }
+
     }
 }
