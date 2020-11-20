@@ -53,6 +53,10 @@ final class UserLoginAction
 
         if (!empty($email_exists) && ($email_exists[0]['password'] == $parsedBody['password'])) {
             $userData = $this->userService->getUserDetails($email_exists[0]['id']);
+            $key = "JWTToken";
+            $issued_at = time();
+            $expiration_time = $issued_at + (60 * 60); // valid for 1 hour
+            $issuer = "http://local.api.localhost/";
             $token = array(
                 "iat" => $issued_at,
                 "exp" => $expiration_time,
@@ -67,10 +71,10 @@ final class UserLoginAction
             $jwt = JWT::encode($token, $key);
             // Build the HTTP response
             $response->getBody()->write((string) json_encode(array("message" => "Login hecho correctamente", "jwt" => $jwt)));
-            return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
         } else {
             $response->getBody()->write((string) json_encode(array("message" => "Login failed.")));
-            return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
         }
     }
 }

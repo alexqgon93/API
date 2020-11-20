@@ -49,14 +49,14 @@ final class UserAddAction
         $newUser->dateBirth = $parsedBody['dateBirth'];
         $newUser->password = $parsedBody['password'];
         $newUser->email = $parsedBody['email'];
-        $newUser->isAuth = ($parsedBody['isAuth'] != null) ? $parsedBody['isAuth'] : 0;
+        $newUser->isAuth = isset($parsedBody['isAuth']) ? $parsedBody['isAuth'] : 0;
 
         if (!empty($newUser->name) && !empty($newUser->surname) && !empty($newUser->dateBirth) && !empty($newUser->email) && !empty($newUser->password)) {
             // Invoke the Domain with inputs and retain the result
             $addUserList = R::store($newUser);
             // Build the HTTP response
             $response->getBody()->write((string) json_encode(array("message" => "Usuario introducido correctamente.")));
-            return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
         } else {
             $response->getBody()->write((string) json_encode(array("message" => "No se ha podido introducir el usuario, pruebelo mas tarde.")));
             return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
