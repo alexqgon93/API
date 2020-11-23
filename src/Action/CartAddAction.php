@@ -40,15 +40,24 @@ final class CartAddAction
     {
         // First we create a Bean or row, empty
         $newCart = R::dispense('carts');
-
+        $newProductCart = R::dispense('product_cart');
         $parsedBody = $request->getParsedBody();
+        //$jwt = $request->getHeader('Authorization');
+        //verify_idtoken
+        //$verify = JWT::verify($jwt, "JWTToken", array('HS256'));
 
         // Now we fill the new row with the params
-        $newCart->userId = $parsedBody['userId'];
+        $newCart->user_id = $parsedBody['userId'];
         $newCart->date = $parsedBody['date'];
-
+        $newCart->amount = $parsedBody['amount'];
         // Invoke the Domain with inputs and retain the result
         $addCardList = R::store($newCart);
+
+        $newProductCart->product_id = $parsedBody['productId'];
+        $newProductCart->quantity = $parsedBody['quantity'];
+        $newProductCart->cartId = $addCardList;
+        $addProductCart = R::store($newProductCart);
+
         // Build the HTTP response
         $response->getBody()->write((string) json_encode($addCardList));
 

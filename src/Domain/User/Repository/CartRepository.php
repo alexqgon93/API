@@ -44,7 +44,7 @@ class CartRepository
      */
     public function getCarts()
     {
-        $sql = 'SELECT carts.id as cartId, carts.date as cartDate, carts.amount as cartAmount, users.name as userName, users.surname as userSurname, products.name as productName FROM ((carts INNER JOIN users ON users.id = carts.userId) INNER JOIN product_cart ON product_cart.cartId = carts.id) INNER JOIN products ON products.id = product_cart.productId';
+        $sql = 'SELECT carts.id as cartId, carts.date as cartDate, carts.amount as cartAmount, users.name as userName, users.surname as userSurname, products.name as productName, product_cart.quantity as productQuantity FROM ((carts INNER JOIN users ON users.id = carts.user_id) INNER JOIN product_cart ON product_cart.cart_id = carts.id) INNER JOIN products ON products.id = product_cart.product_id';
         return array_values(R::getAll($sql));
     }
 }

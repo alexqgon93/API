@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RedBeanPHP\R;
 
-include_once '/Applications/XAMPP/xamppfiles/htdocs/API/config/core.php';
 include_once '/Applications/XAMPP/xamppfiles/htdocs/API/lib/php-jwt-master/src/BeforeValidException.php';
 include_once '/Applications/XAMPP/xamppfiles/htdocs/API/lib/php-jwt-master/src/ExpiredException.php';
 include_once '/Applications/XAMPP/xamppfiles/htdocs/API/lib/php-jwt-master/src/SignatureInvalidException.php';
@@ -55,7 +54,7 @@ final class UserLoginAction
             $userData = $this->userService->getUserDetails($email_exists[0]['id']);
             $key = "JWTToken";
             $issued_at = time();
-            $expiration_time = $issued_at + (60 * 60); // valid for 1 hour
+            $expiration_time = $issued_at + (60 * 60 * 60);
             $issuer = "http://local.api.localhost/";
             $token = array(
                 "iat" => $issued_at,
@@ -63,8 +62,9 @@ final class UserLoginAction
                 "iss" => $issuer,
                 "data" => array(
                     "id" => $userData->id,
-                    "firstname" => $userData->firstname,
-                    "lastname" => $userData->lastname,
+                    "firstname" => $userData->name,
+                    "lastname" => $userData->surname,
+                    "isAuth" => $userData->is_auth,
                     "email" => $userData->email,
                 ),
             );
