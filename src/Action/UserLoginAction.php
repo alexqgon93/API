@@ -54,7 +54,7 @@ final class UserLoginAction
             $userData = $this->userService->getUserDetails($email_exists[0]['id']);
             $key = "JWTToken";
             $issued_at = time();
-            $expiration_time = $issued_at + (60 * 60 * 60);
+            $expiration_time = $issued_at + (60 * 60);
             $issuer = "http://local.api.localhost/";
             $token = array(
                 "iat" => $issued_at,
